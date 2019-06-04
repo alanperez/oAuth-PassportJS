@@ -1,10 +1,10 @@
 const express = require("express");
 const server = express();
 const serverConfig = require("./serverConfig");
-
+const passport = require('passport')
 //middleware
 serverConfig(server);
-
+server.use(passport.initialize());
 //routes
 const authRoutes = require('../controllers/auth-routes')
 server.use('/auth', authRoutes);

@@ -25,11 +25,13 @@ router.get('/google/redirect',passport.authenticate('google'),(req,res) => {
 })
 //auth with facebook
 router.get('/facebook', passport.authenticate('facebook', {
-    scope:['read_stream']
+    scope:['public_profile,email']
 }));
 
 // callback route for facebook to redirect to
-router.get('/facebook/redirect', (req,res) => {
-    res.send('You Reached the Facebook Callback Url')
-})
+  router.get('/facebook/redirect',passport.authenticate('facebook', { failureRedirect: '/' }),
+  (req, res) => {
+    res.redirect('/')
+  }
+)
 module.exports = router;
